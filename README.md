@@ -1,6 +1,6 @@
 <div align="center">
   <h1>💰 Cost AI</h1>
-  <p><b>Enterprise-Grade LLM API Usage Tracking & Automatic Kill Switches</b></p>
+  <p><b> LLM API Usage Tracking & Automatic Kill Switches</b></p>
   <br />
 
   [![Next.js](https://img.shields.io/badge/Next.js_15-black?style=for-the-badge&logo=next.js&logoColor=white)](https://nextjs.org/)
