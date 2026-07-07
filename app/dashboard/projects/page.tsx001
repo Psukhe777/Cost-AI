@@ -1,0 +1,21 @@
+import { ProjectCostTable } from "@/components/projects/project-cost-table";
+import { AppShell } from "@/components/shell/app-shell";
+import { MetricStrip } from "@/components/shell/metric-strip";
+import { getCurrentUser } from "@/lib/auth";
+import { getProjectsPageData } from "@/lib/queries";
+
+export const dynamic = "force-dynamic";
+
+export default async function ProjectsPage() {
+  const user = await getCurrentUser();
+  const data = await getProjectsPageData(user.id);
+
+  return (
+    <AppShell user={data.user}>
+      <div className="mx-auto grid max-w-[1600px] gap-4">
+        <MetricStrip metrics={data.metrics} />
+        <ProjectCostTable rows={data.byProject} />
+      </div>
+    </AppShell>
+  );
+}
