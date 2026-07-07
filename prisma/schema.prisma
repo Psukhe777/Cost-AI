@@ -1,0 +1,75 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  apiSecret String   @unique @map("api_secret")
+  budgetUsd Decimal  @default(0.00) @map("budget_usd")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  projects  Project[]
+  usageLogs UsageLog[]
+
+  @@map("users")
+}
+
+model Project {
+  id        String   @id @default(cuid())
+  userId    String   @map("user_id")
+  key       String
+  name      String
+  createdAt DateTime @default(now()) @map("created_at")
+
+  user      User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  usageLogs UsageLog[]
+
+  @@unique([userId, key])
+  @@index([userId])
+  @@map("projects")
+}
+
+model UsageLog {
+  id           String  @id @default(cuid())
+  userId       String  @map("user_id")
+  projectRefId String? @map("project_ref_id")
+  projectKey   String? @map("project_id")
+  agentName    String? @map("agent_name")
+  agentId      String? @map("agent_id")
+  tagsJson     String? @map("tags_json")
+  provider     String
+  model        String
+  modelType    String  @default("CLOUD") @map("model_type")
+
+  promptTokens     Int @default(0) @map("prompt_tokens")
+  completionTokens Int @default(0) @map("completion_tokens")
+  totalTokens      Int @default(0) @map("total_tokens")
+
+  costUsd   Decimal @default(0.00) @map("cost_usd")
+  ttftMs    Int?    @map("ttft_ms")
+  latencyMs Int?    @map("latency_ms")
+  tps       Float?
+
+  requestName  String?  @map("request_name")
+  metadataJson String?  @map("metadata_json")
+  createdAt    DateTime @default(now()) @map("created_at")
+
+  user    User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  project Project? @relation(fields: [projectRefId], references: [id], onDelete: SetNull)
+
+  @@index([userId, createdAt])
+  @@index([userId, model])
+  @@index([userId, provider])
+  @@index([userId, agentName])
+  @@index([userId, agentId])
+  @@index([userId, projectKey])
+  @@index([projectRefId])
+  @@map("usage_logs")
+}
