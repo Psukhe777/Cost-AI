@@ -417,5 +417,4 @@ MIT License. See [LICENSE](./LICENSE).
 
 Built by Nehemiah Sturdivant at Babylon Technologies LLC.
 
-Built with focus by Nehemiah Sturdivant at Babylon Technologies LLC.
 
