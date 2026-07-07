@@ -1,0 +1,14 @@
+node_modules
+.next
+.next-v2
+out
+dist
+.env
+.env.local
+*.db
+*.db-journal
+*.sqlite
+*.sqlite-journal
+tsconfig.tsbuildinfo
+__pycache__
+.pytest_cache
