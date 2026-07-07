@@ -1,0 +1,59 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 240 10% 4%;
+  --foreground: 0 0% 98%;
+  --card: 0 0% 100%;
+  --card-foreground: 0 0% 98%;
+  --popover: 240 10% 4%;
+  --popover-foreground: 0 0% 98%;
+  --primary: 190 38% 66%;
+  --primary-foreground: 220 16% 8%;
+  --secondary: 240 5% 16%;
+  --secondary-foreground: 240 5% 84%;
+  --muted: 240 5% 12%;
+  --muted-foreground: 240 5% 56%;
+  --accent: 190 38% 66%;
+  --accent-foreground: 220 16% 8%;
+  --destructive: 0 0% 72%;
+  --destructive-foreground: 240 10% 4%;
+  --border: 240 4% 18%;
+  --input: 240 4% 18%;
+  --ring: 190 38% 66%;
+  --radius: 1rem;
+}
+
+* {
+  @apply border-border;
+}
+
+html {
+  color-scheme: dark;
+}
+
+body {
+  @apply bg-zinc-950 font-sans text-zinc-50 antialiased;
+  font-feature-settings:
+    "rlig" 1,
+    "calt" 1;
+}
+
+::selection {
+  background: hsl(var(--primary) / 0.28);
+}
+
+.chart-grid line {
+  stroke: rgb(255 255 255 / 0.08);
+}
+
+@layer components {
+  .glass-panel {
+    @apply rounded-2xl border border-white/10 bg-white/5 shadow-panel backdrop-blur-xl;
+  }
+
+  .micro-label {
+    @apply text-xs font-semibold uppercase tracking-wider text-zinc-500;
+  }
+}
