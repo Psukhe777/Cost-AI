@@ -1,5 +1,4 @@
-use client'
-
+"use client";
 import { useState } from 'react'
 import { ArrowRight, Check, Mail } from 'lucide-react'
 import { SiteHeader } from '@/components/site-header'
